@@ -1,24 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="auT-Lw-EiD">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--ConverterView Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="ConverterView Controller" customClass="ConverterViewController" customModule="Unit_Converter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="XXa-Oo-hLQ">
+                                <rect key="frame" x="22.5" y="84" width="330" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya0-bh-ft2">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.40196078429999998" blue="0.50550985729999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="DC6-mT-E4q"/>
+                                            <constraint firstAttribute="width" constant="50" id="UQF-Fy-2Uj"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="weight"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bp0-k7-am0">
+                                        <rect key="frame" x="70" y="0.0" width="50" height="50"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="temperature"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XQ-BU-rC2">
+                                        <rect key="frame" x="140" y="0.0" width="50" height="50"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="length"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA4-9W-kgR">
+                                        <rect key="frame" x="210" y="0.0" width="50" height="50"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="speed"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2S-dR-eNi">
+                                        <rect key="frame" x="280" y="0.0" width="50" height="50"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="volume"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30u-CL-SIK">
+                                <rect key="frame" x="16" y="134" width="343" height="469"/>
+                                <color key="backgroundColor" red="0.098624675539999998" green="1" blue="0.33720897459999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTb-py-YuJ">
+                                <rect key="frame" x="16" y="603" width="343" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Y0z-2Y-0qF"/>
+                                    <constraint firstAttribute="width" constant="343" id="y82-dG-gJR"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem image="history" id="ebW-wD-bnR"/>
+                                    <barButtonItem image="save" id="PXx-e4-wzy"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="30u-CL-SIK" secondAttribute="trailing" constant="16" id="3nL-dG-pje"/>
+                            <constraint firstItem="XXa-Oo-hLQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="5DY-YF-Fk5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZTb-py-YuJ" secondAttribute="bottom" constant="20" id="7CZ-9z-eko"/>
+                            <constraint firstItem="30u-CL-SIK" firstAttribute="top" secondItem="XXa-Oo-hLQ" secondAttribute="bottom" id="OW3-HM-dLx"/>
+                            <constraint firstItem="30u-CL-SIK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="TqR-UP-nn5"/>
+                            <constraint firstItem="XXa-Oo-hLQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bgj-cv-mLh"/>
+                            <constraint firstItem="ZTb-py-YuJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dg5-gu-9l4"/>
+                            <constraint firstItem="ZTb-py-YuJ" firstAttribute="top" secondItem="30u-CL-SIK" secondAttribute="bottom" id="fdn-l9-CkA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZTb-py-YuJ" secondAttribute="bottom" constant="20" id="zfA-yj-tSf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Converter" id="eK2-qQ-tdg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="928.79999999999995" y="-564.46776611694156"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Lh-Tu-78B">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="auT-Lw-EiD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Zp-Kg-u1m">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Bpc-zq-rhE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M2f-5M-2Qc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="133.59999999999999" y="-564.46776611694156"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="history" width="25" height="25"/>
+        <image name="length" width="50" height="50"/>
+        <image name="save" width="25" height="25"/>
+        <image name="speed" width="50" height="50"/>
+        <image name="temperature" width="50" height="50"/>
+        <image name="volume" width="50" height="50"/>
+        <image name="weight" width="50" height="50"/>
+    </resources>
 </document>
