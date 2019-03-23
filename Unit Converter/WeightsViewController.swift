@@ -25,6 +25,23 @@ enum WeightMetrics: Int {
             return 1
         }
     }
+    
+    func toString(_ value: Double) -> String {
+        let suffix = value != 1.0 ? "s" : "" // TODO: replace value with a constant
+        
+        switch self {
+        case .ounce:
+            return "\(value) ounce\(suffix)"
+        case .pound:
+            return "\(value) pound\(suffix)"
+        case .gram:
+            return "\(value) gram\(suffix)"
+        case .stone:
+            return "\(value) stone\(suffix)"
+        case .kg:
+            return "\(value) kilogram\(suffix)"
+        }
+    }
 }
 
 class WeightsViewController: UIViewController, UITextFieldDelegate {
@@ -63,26 +80,29 @@ class WeightsViewController: UIViewController, UITextFieldDelegate {
         
         for textField in textFields {
             if let conversionRateToKg = WeightMetrics(rawValue: textField.tag)?.getConversionRateToKg(){
-                textField.text = roundValue(enteredValueInKg / conversionRateToKg)
+                textField.text = Utilities.roundValue(enteredValueInKg / conversionRateToKg)
             }
         }
     }
     
-    func roundValue(_ valueToRound: Double) -> String {
-        var roundedValue = String(round(10000 * valueToRound) / 10000)
-        if let trailingZeros = roundedValue.components(separatedBy: ".").last?.count {
-            switch trailingZeros {
-            case 1:
-                roundedValue += "000"
-            case 2:
-                roundedValue += "00"
-            case 3:
-                roundedValue += "0"
-            default:
-                break
+    func saveConversion()  {
+        var historyString: String = ""
+        var history = UserDefaults.standard.array(forKey: "weightsHistory") ?? []
+        
+        for textField in textFields {
+            guard let text = textField.text else {return}
+            
+            if let numericValue = Double(text), let conversionValue = WeightMetrics(rawValue: textField.tag)?.toString(numericValue) {
+                historyString += "\(conversionValue)\(textField != textFields.last ? "\n" : "")"
             }
         }
-        return roundedValue
+        
+        
+        if history.count == 5 { // TODO: replace value with a constant
+            history.remove(at: 4) // TODO: replace value with a constant
+        }
+        history.insert(historyString, at: 0) // TODO: replace value with a constant
+        UserDefaults.standard.set(history, forKey: "weightsHistory")
     }
     
     

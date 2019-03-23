@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7438B55C2246A6E400BA29BF /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7438B55B2246A6E400BA29BF /* HistoryViewController.swift */; };
+		7438B55E2246CD2D00BA29BF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7438B55D2246CD2D00BA29BF /* Utilities.swift */; };
 		744B4D68223D690C00E29508 /* WeightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744B4D67223D690C00E29508 /* WeightsViewController.swift */; };
 		74DA9C61223C200500073AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DA9C60223C200500073AD6 /* AppDelegate.swift */; };
 		74DA9C63223C200500073AD6 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DA9C62223C200500073AD6 /* ConverterViewController.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7438B55B2246A6E400BA29BF /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		7438B55D2246CD2D00BA29BF /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		744B4D67223D690C00E29508 /* WeightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsViewController.swift; sourceTree = "<group>"; };
 		74DA9C5D223C200500073AD6 /* Unit Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Unit Converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DA9C60223C200500073AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,7 +75,9 @@
 			children = (
 				74DA9C60223C200500073AD6 /* AppDelegate.swift */,
 				74DA9C62223C200500073AD6 /* ConverterViewController.swift */,
+				7438B55D2246CD2D00BA29BF /* Utilities.swift */,
 				74DA9C64223C200500073AD6 /* Main.storyboard */,
+				7438B55B2246A6E400BA29BF /* HistoryViewController.swift */,
 				744B4D67223D690C00E29508 /* WeightsViewController.swift */,
 				74DA9C67223C200800073AD6 /* Assets.xcassets */,
 				74DA9C69223C200800073AD6 /* LaunchScreen.storyboard */,
@@ -155,6 +161,8 @@
 				744B4D68223D690C00E29508 /* WeightsViewController.swift in Sources */,
 				74DA9C63223C200500073AD6 /* ConverterViewController.swift in Sources */,
 				74DA9C61223C200500073AD6 /* AppDelegate.swift in Sources */,
+				7438B55E2246CD2D00BA29BF /* Utilities.swift in Sources */,
+				7438B55C2246A6E400BA29BF /* HistoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

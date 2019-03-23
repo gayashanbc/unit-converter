@@ -22,6 +22,7 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
     var tabBarViewControllers: [UIViewController]!
     var selectedIndex = 0
     var activeTextField = UITextField()
+    var saveFunctions: [() -> Void]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
         if let weightViewController = storyboard.instantiateViewController(withIdentifier: "WeightViewController") as? WeightsViewController {
             weightViewController.parentControllerReference = self
             tabBarViewControllers = [weightViewController]
+            saveFunctions = [weightViewController.saveConversion]
             
             tabBarButtons[selectedIndex].isSelected = true
         }
@@ -74,6 +76,22 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
+    }
+    
+    @IBAction func constantsButtonPressed(_ sender: Any) {
+        UserDefaults.standard.removeObject(forKey: "weightsHistory") // TODO: remove
+        performSegue(withIdentifier: "constantsViewSegue", sender: self)
+    }
+    
+    @IBAction func historyButtonPressed(_ sender: Any) {
+        print(UserDefaults.standard.array(forKey: "weightsHistory") ?? []) // TODO: remove
+        performSegue(withIdentifier: "historyViewSegue", sender: self)
+    }
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        for saveFunction in saveFunctions {
+            saveFunction()
+        }
     }
     
     func setKeyValueToTextField(pressedButton: KeyboardButton) {
