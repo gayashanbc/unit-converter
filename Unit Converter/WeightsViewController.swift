@@ -49,7 +49,7 @@ enum WeightMetrics: Int {
 }
 
 
-class WeightsViewController: UIViewController, UITextFieldDelegate, SaveableConversion {
+class WeightsViewController: UIViewController, UITextFieldDelegate, MetricConverter {
     
     @IBOutlet weak var ounceTextField: UITextField!
     @IBOutlet weak var poundTextField: UITextField!
@@ -106,12 +106,15 @@ class WeightsViewController: UIViewController, UITextFieldDelegate, SaveableConv
             }
         }
         
-        if history.count == maxHistorySize { // Remove the olderst element when the capacity exceeds
-            history.remove(at: lastHistoryElement)
+        if historyString != "" { // Ensure that there is at least one conversion to be saved
+            if history.count == maxHistorySize { // Remove the olderst element when the capacity exceeds
+                history.remove(at: lastHistoryElement)
+            }
+            
+            history.insert(historyString, at: topHistoryElement) // This will show the latest conversion at the top
+            UserDefaults.standard.set(history, forKey: historyKey)
         }
         
-        history.insert(historyString, at: topHistoryElement) // This will show the latest conversion at the top
-        UserDefaults.standard.set(history, forKey: historyKey)
     }
     
 }

@@ -12,44 +12,64 @@ enum KeyboardButton: Int {
     case zero, one, two, three, four, five, six, seven, eight, nine, period, delete, negation
 }
 
+enum Metrics: Int{
+    case Weight, Temperature, Length, Speed, Volume
+    
+    func toString() -> String {
+        switch self {
+        case .Weight:
+            return "Weight Converter"
+        case .Temperature:
+            return "Temperature Converter"
+        case .Length:
+            return "Length Converter"
+        case .Speed:
+            return "Speed Converter"
+        case .Volume:
+            return "Volume Converter"
+        }
+    }
+}
+
 class ConverterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet var tabBarButtons: [UIButton]!
     @IBOutlet weak var negateButton: UIButton!
     
-    var weightViewController: UIViewController!
     var tabBarViewControllers: [UIViewController]!
-    var selectedIndex = 0
+    var selectedTabIndex = 0
     var activeTextField = UITextField()
     var saveFunctions: [() -> Void]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let weightViewController = storyboard.instantiateViewController(withIdentifier: "WeightViewController") as? WeightsViewController {
-            weightViewController.parentControllerReference = self
-            tabBarViewControllers = [weightViewController]
-            saveFunctions = [weightViewController.saveConversion]
-            
-            tabBarButtons[selectedIndex].isSelected = true
-        }
-        //        weightViewController = storyboard.instantiateViewController(withIdentifier: "WeightViewController")
-        //
-        //        tabBarViewControllers = [weightViewController]
-        //
-        //        tabBarButtons[selectedIndex].isSelected = true
-        if selectedIndex == 0 { // TODO chech if temperature is selected
-            negateButton.isEnabled = false
-        }
-        didPressTab(tabBarButtons[selectedIndex])
+        
+        guard let weightsViewController = storyboard.instantiateViewController(withIdentifier: "WeightsViewController") as? WeightsViewController else {return}
+        guard let tempsViewController = storyboard.instantiateViewController(withIdentifier: "TempsViewController") as? TempsViewController else {return}
+        guard let lengthsViewController = storyboard.instantiateViewController(withIdentifier: "LengthsViewController") as? LengthsViewController else {return}
+        guard let speedsViewController = storyboard.instantiateViewController(withIdentifier: "SpeedsViewController") as? SpeedsViewController else {return}
+        guard let volumesViewController = storyboard.instantiateViewController(withIdentifier: "VolumesViewController") as? VolumesViewController else {return}
+        
+        tabBarViewControllers = [weightsViewController, tempsViewController, lengthsViewController, speedsViewController, volumesViewController]
+        saveFunctions = [weightsViewController.saveConversion, tempsViewController.saveConversion, lengthsViewController.saveConversion, speedsViewController.saveConversion, volumesViewController.saveConversion]
+        
+        weightsViewController.parentControllerReference = self
+        tempsViewController.parentControllerReference = self
+        lengthsViewController.parentControllerReference = self
+        speedsViewController.parentControllerReference = self
+        volumesViewController.parentControllerReference = self
+        
+        didPressTab(tabBarButtons[selectedTabIndex])
     }
     
     @IBAction func didPressTab(_ sender: UIButton) {
-        let previousIndex = selectedIndex
-        selectedIndex = sender.tag
+        let previousIndex = selectedTabIndex
         
-        tabBarButtons[previousIndex].isSelected = false
+        selectedTabIndex = sender.tag
+        tabBarButtons[previousIndex].backgroundColor = Utilities.buttonDeselectedColor
+        negateButton.isEnabled = selectedTabIndex != 1 ? false : true // Only enable negation button for Temperature
         
         let previousViewController = tabBarViewControllers[previousIndex]
         
@@ -57,15 +77,14 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
         previousViewController.view.removeFromSuperview()
         previousViewController.removeFromParent()
         
-        sender.isSelected = true
+        sender.backgroundColor = Utilities.buttonSelectedColor
+        self.title = Metrics(rawValue: selectedTabIndex)?.toString()
         
-        let newViewController = tabBarViewControllers[selectedIndex]
+        let newViewController = tabBarViewControllers[selectedTabIndex]
         
         addChild(newViewController)
-        
         newViewController.view.frame = contentView.bounds
         contentView.addSubview(newViewController.view)
-        
         newViewController.didMove(toParent: self)
     }
     
@@ -89,9 +108,7 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        for saveFunction in saveFunctions {
-            saveFunction()
-        }
+        saveFunctions[selectedTabIndex]()
     }
     
     func setKeyValueToTextField(pressedButton: KeyboardButton) {
@@ -105,8 +122,10 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
                     self.activeTextField.text = currentText
                 }
             case .negation:
-                currentText.insert("-", at: currentText.index(currentText.startIndex, offsetBy: 0))
-                self.activeTextField.text = currentText
+                if(!currentText.contains("-")){
+                    activeTextField.text?.insert("-", at: currentText.index(currentText.startIndex, offsetBy: 0))
+                }
+
             case .period:
                 if(!currentText.contains(".")){
                     activeTextField.insertText(".")
@@ -141,7 +160,6 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
         
         return (currentPosition, nextPosition)
     }
-    
     
 }
 

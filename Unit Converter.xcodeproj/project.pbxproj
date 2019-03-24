@@ -10,6 +10,10 @@
 		7438B55C2246A6E400BA29BF /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7438B55B2246A6E400BA29BF /* HistoryViewController.swift */; };
 		7438B55E2246CD2D00BA29BF /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7438B55D2246CD2D00BA29BF /* Commons.swift */; };
 		744B4D68223D690C00E29508 /* WeightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744B4D67223D690C00E29508 /* WeightsViewController.swift */; };
+		7452CCE4224753180030EEC8 /* TempsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7452CCE3224753180030EEC8 /* TempsViewController.swift */; };
+		7452CCE6224782C80030EEC8 /* LengthsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7452CCE5224782C80030EEC8 /* LengthsViewController.swift */; };
+		7452CCE8224782E20030EEC8 /* SpeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7452CCE7224782E20030EEC8 /* SpeedsViewController.swift */; };
+		7452CCEA224782F50030EEC8 /* VolumesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7452CCE9224782F50030EEC8 /* VolumesViewController.swift */; };
 		74DA9C61223C200500073AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DA9C60223C200500073AD6 /* AppDelegate.swift */; };
 		74DA9C63223C200500073AD6 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DA9C62223C200500073AD6 /* ConverterViewController.swift */; };
 		74DA9C66223C200500073AD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DA9C64223C200500073AD6 /* Main.storyboard */; };
@@ -34,6 +38,10 @@
 		7438B55B2246A6E400BA29BF /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		7438B55D2246CD2D00BA29BF /* Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
 		744B4D67223D690C00E29508 /* WeightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsViewController.swift; sourceTree = "<group>"; };
+		7452CCE3224753180030EEC8 /* TempsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempsViewController.swift; sourceTree = "<group>"; };
+		7452CCE5224782C80030EEC8 /* LengthsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LengthsViewController.swift; sourceTree = "<group>"; };
+		7452CCE7224782E20030EEC8 /* SpeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedsViewController.swift; sourceTree = "<group>"; };
+		7452CCE9224782F50030EEC8 /* VolumesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumesViewController.swift; sourceTree = "<group>"; };
 		74DA9C5D223C200500073AD6 /* Unit Converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Unit Converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DA9C60223C200500073AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74DA9C62223C200500073AD6 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +85,10 @@
 				74DA9C62223C200500073AD6 /* ConverterViewController.swift */,
 				7438B55D2246CD2D00BA29BF /* Commons.swift */,
 				74DA9C64223C200500073AD6 /* Main.storyboard */,
+				7452CCE7224782E20030EEC8 /* SpeedsViewController.swift */,
+				7452CCE9224782F50030EEC8 /* VolumesViewController.swift */,
+				7452CCE5224782C80030EEC8 /* LengthsViewController.swift */,
+				7452CCE3224753180030EEC8 /* TempsViewController.swift */,
 				7438B55B2246A6E400BA29BF /* HistoryViewController.swift */,
 				744B4D67223D690C00E29508 /* WeightsViewController.swift */,
 				74DA9C67223C200800073AD6 /* Assets.xcassets */,
@@ -158,9 +170,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7452CCE8224782E20030EEC8 /* SpeedsViewController.swift in Sources */,
 				744B4D68223D690C00E29508 /* WeightsViewController.swift in Sources */,
 				74DA9C63223C200500073AD6 /* ConverterViewController.swift in Sources */,
+				7452CCE4224753180030EEC8 /* TempsViewController.swift in Sources */,
 				74DA9C61223C200500073AD6 /* AppDelegate.swift in Sources */,
+				7452CCEA224782F50030EEC8 /* VolumesViewController.swift in Sources */,
+				7452CCE6224782C80030EEC8 /* LengthsViewController.swift in Sources */,
 				7438B55E2246CD2D00BA29BF /* Commons.swift in Sources */,
 				7438B55C2246A6E400BA29BF /* HistoryViewController.swift in Sources */,
 			);
