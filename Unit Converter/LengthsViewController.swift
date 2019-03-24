@@ -46,7 +46,7 @@ enum LengthMetrics: Int {
         case .yard:
             return "\(stringValue!) yard\(suffix)"
         case .inch:
-            return "\(stringValue!) inch\(suffix)"
+            return "\(stringValue!) inch\(value != 1.0 ? "es" : "")"
         }
     }
 }

@@ -8,27 +8,8 @@
 
 import UIKit
 
-enum KeyboardButton: Int {
+enum KeyboardButton: Int { // Represents all the buttons in the custom keyboard
     case zero, one, two, three, four, five, six, seven, eight, nine, period, delete, negation
-}
-
-enum Metrics: Int{
-    case Weight, Temperature, Length, Speed, Volume
-    
-    func toString() -> String {
-        switch self {
-        case .Weight:
-            return "Weight Converter"
-        case .Temperature:
-            return "Temperature Converter"
-        case .Length:
-            return "Length Converter"
-        case .Speed:
-            return "Speed Converter"
-        case .Volume:
-            return "Volume Converter"
-        }
-    }
 }
 
 class ConverterViewController: UIViewController, UITextFieldDelegate {
@@ -39,11 +20,12 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
     
     var tabBarViewControllers: [UIViewController]!
     var selectedTabIndex = 0
-    var activeTextField = UITextField()
-    var saveFunctions: [() -> Void]!
+    var activeTextField = UITextField() // text field with active text focus
+    var saveFunctions: [() -> Void]! // holds history save functions of each metric converter
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let weightsViewController = storyboard.instantiateViewController(withIdentifier: "WeightsViewController") as? WeightsViewController else {return}
@@ -64,6 +46,9 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
         didPressTab(tabBarButtons[selectedTabIndex])
     }
     
+    /*
+    Handles tab navigation
+    */
     @IBAction func didPressTab(_ sender: UIButton) {
         let previousIndex = selectedTabIndex
         
@@ -73,15 +58,17 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
         
         let previousViewController = tabBarViewControllers[previousIndex]
         
+        // Remove previous viewController from the contentView
         previousViewController.willMove(toParent: nil)
         previousViewController.view.removeFromSuperview()
         previousViewController.removeFromParent()
         
         sender.backgroundColor = Utilities.buttonSelectedColor
-        self.title = Metrics(rawValue: selectedTabIndex)?.toString()
+        self.title = "\(Metrics(rawValue: selectedTabIndex)?.toString() ?? "") Converter"
         
         let newViewController = tabBarViewControllers[selectedTabIndex]
         
+        // Add next viewController to the contentView
         addChild(newViewController)
         newViewController.view.frame = contentView.bounds
         contentView.addSubview(newViewController.view)
@@ -89,7 +76,6 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func keyboardButtonPressed(_ sender: UIButton) {
-        print(sender.tag)
         setKeyValueToTextField(pressedButton: KeyboardButton(rawValue: sender.tag)!)
     }
     
@@ -98,19 +84,20 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func constantsButtonPressed(_ sender: Any) {
-        UserDefaults.standard.removeObject(forKey: "weightsHistory") // TODO: remove
         performSegue(withIdentifier: "constantsViewSegue", sender: self)
     }
     
     @IBAction func historyButtonPressed(_ sender: Any) {
-        print(UserDefaults.standard.array(forKey: "weightsHistory") ?? []) // TODO: remove
         performSegue(withIdentifier: "historyViewSegue", sender: self)
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        saveFunctions[selectedTabIndex]()
+        saveFunctions[selectedTabIndex]() // Invoke the save function of the active metric converter
     }
     
+    /*
+    Inserts the pressed button value of the custom keyboard to the active text field
+    */
     func setKeyValueToTextField(pressedButton: KeyboardButton) {
         let cursorPosition = getCursorPositions()
         
@@ -143,6 +130,9 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    /*
+    Returns the current cursor position and the next cursor position
+    */
     func getCursorPositions() -> (current: Int, next: UITextPosition)  {
         var currentPosition = 0
         var nextPosition = activeTextField.beginningOfDocument

@@ -376,6 +376,7 @@
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="weight"/>
                                         <connections>
+                                            <action selector="didPressTab:" destination="3h1-2l-3Fb" eventType="touchUpInside" id="afH-1j-0GV"/>
                                             <action selector="didPressTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c2m-3j-uGY"/>
                                         </connections>
                                     </button>
@@ -386,6 +387,7 @@
                                         <state key="normal" image="temperature"/>
                                         <connections>
                                             <action selector="didPressTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CF2-fb-AB4"/>
+                                            <action selector="didPressTab:" destination="3h1-2l-3Fb" eventType="touchUpInside" id="ohy-7p-LME"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qb1-Hd-O5d">
@@ -395,6 +397,7 @@
                                         <state key="normal" image="length"/>
                                         <connections>
                                             <action selector="didPressTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RbD-YZ-nqa"/>
+                                            <action selector="didPressTab:" destination="3h1-2l-3Fb" eventType="touchUpInside" id="Yae-JW-typ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsI-yE-deB">
@@ -403,6 +406,7 @@
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="speed"/>
                                         <connections>
+                                            <action selector="didPressTab:" destination="3h1-2l-3Fb" eventType="touchUpInside" id="01Q-Zu-lm4"/>
                                             <action selector="didPressTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YJj-ie-Mrg"/>
                                         </connections>
                                     </button>
@@ -412,6 +416,7 @@
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="volume"/>
                                         <connections>
+                                            <action selector="didPressTab:" destination="3h1-2l-3Fb" eventType="touchUpInside" id="1JP-e9-3PZ"/>
                                             <action selector="didPressTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TQq-lf-kJc"/>
                                         </connections>
                                     </button>
@@ -433,9 +438,6 @@
                                         <color key="backgroundColor" red="0.0" green="0.62352941179999999" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="3h1-2l-3Fb" id="E4L-Ne-gpD"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.058823529409999999" green="0.039215686270000001" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -449,6 +451,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Nft-Aw-t2A"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="U2p-TI-mKh" id="o4B-9S-juz"/>
+                        <outletCollection property="tabBarButtons" destination="UaH-MK-9kA" collectionClass="NSMutableArray" id="CV8-hW-MlJ"/>
+                        <outletCollection property="tabBarButtons" destination="ffy-jG-AsT" collectionClass="NSMutableArray" id="Jpq-DC-30j"/>
+                        <outletCollection property="tabBarButtons" destination="qb1-Hd-O5d" collectionClass="NSMutableArray" id="n6H-nh-tig"/>
+                        <outletCollection property="tabBarButtons" destination="zsI-yE-deB" collectionClass="NSMutableArray" id="byJ-9w-6HR"/>
+                        <outletCollection property="tabBarButtons" destination="W5t-Vo-VyI" collectionClass="NSMutableArray" id="jpr-8R-Z7Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tRE-tr-jb5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
