@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="constantsView" translatesAutoresizingMaskIntoConstraints="NO" id="0qj-v4-79S">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="physicalConstants" translatesAutoresizingMaskIntoConstraints="NO" id="0qj-v4-79S">
                                 <rect key="frame" x="20" y="84" width="335" height="563"/>
                             </imageView>
                         </subviews>
@@ -1389,9 +1389,9 @@
     </scenes>
     <resources>
         <image name="constants" width="22.5" height="22.5"/>
-        <image name="constantsView" width="228.47999572753906" height="197.52000427246094"/>
         <image name="history" width="22.5" height="22.5"/>
         <image name="length" width="37.5" height="37.5"/>
+        <image name="physicalConstants" width="547" height="584"/>
         <image name="save" width="22.5" height="22.5"/>
         <image name="speed" width="37.5" height="37.5"/>
         <image name="temperature" width="37.5" height="37.5"/>

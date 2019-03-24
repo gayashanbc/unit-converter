@@ -20,6 +20,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.allowsSelection = false
         didPressTab(tabBarButtons[selectedTabIndex])
     }
     
