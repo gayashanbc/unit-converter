@@ -21,30 +21,35 @@ enum WeightMetrics: Int {
             return 0.001000000
         case .stone:
             return 6.350293
-        default:
+        default: // value of the default SI metric for weights [i.e. kilogram for weights]
             return 1
         }
     }
     
     func toString(_ value: Double) -> String {
-        let suffix = value != 1.0 ? "s" : "" // TODO: replace value with a constant
+        let suffix = value != 1.0 ? "s" : "" // Convert seomething like 1 kilograms to 1 kilogram
+        
+        // Remove the decimal places if there's only one trailing decimal zero [5.0 grams to 5 grams]
+        let numericPieces = String(value).components(separatedBy: ".")
+        let stringValue = numericPieces.last == "0" ? numericPieces.first : numericPieces.joined(separator: ".")
         
         switch self {
         case .ounce:
-            return "\(value) ounce\(suffix)"
+            return "\(stringValue!) ounce\(suffix)"
         case .pound:
-            return "\(value) pound\(suffix)"
+            return "\(stringValue!) pound\(suffix)"
         case .gram:
-            return "\(value) gram\(suffix)"
+            return "\(stringValue!) gram\(suffix)"
         case .stone:
-            return "\(value) stone\(suffix)"
+            return "\(stringValue!) stone\(suffix)"
         case .kg:
-            return "\(value) kilogram\(suffix)"
+            return "\(stringValue!) kilogram\(suffix)"
         }
     }
 }
 
-class WeightsViewController: UIViewController, UITextFieldDelegate {
+
+class WeightsViewController: UIViewController, UITextFieldDelegate, SaveableConversion {
     
     @IBOutlet weak var ounceTextField: UITextField!
     @IBOutlet weak var poundTextField: UITextField!
@@ -53,8 +58,9 @@ class WeightsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var kgTextField: UITextField!
     
     var textFields: [UITextField]!
-    
     var parentControllerReference: UITextFieldDelegate?
+    
+    let topHistoryElement = 0, lastHistoryElement = 4, maxHistorySize = 5, historyKey = "weightsHistory"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,16 +74,17 @@ class WeightsViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
-        print("Eidted \(sender.tag)")
-        print("Conversin rate: \(WeightMetrics.ounce.getConversionRateToKg())")
-        
+        // Return if the textfield is empty
         guard let textFieldValue = sender.text else {return}
         guard let enteredNumValue = Double(textFieldValue) else {return}
+        
+        // Get base conversion rate to the default metric (i.e. Kilograms) based in the textfield tag
         guard let baseConversionRate = WeightMetrics(rawValue: sender.tag)?.getConversionRateToKg() else {return}
         
+        // Convert the conversion value to the dafault metric (i.e. Kilograms)
         let enteredValueInKg = enteredNumValue * baseConversionRate
-        print("Kg Value: \(enteredValueInKg)")
         
+        // Calculate conversion values for all other metrics
         for textField in textFields {
             if let conversionRateToKg = WeightMetrics(rawValue: textField.tag)?.getConversionRateToKg(){
                 textField.text = Utilities.roundValue(enteredValueInKg / conversionRateToKg)
@@ -87,23 +94,24 @@ class WeightsViewController: UIViewController, UITextFieldDelegate {
     
     func saveConversion()  {
         var historyString: String = ""
-        var history = UserDefaults.standard.array(forKey: "weightsHistory") ?? []
+        var history = UserDefaults.standard.array(forKey: historyKey) ?? [] // Create a history array if doesn't exist
         
-        for textField in textFields {
-            guard let text = textField.text else {return}
+        for textField in textFields { // Create a concatenated history string
+            guard let text = textField.text else {return} // Skip textfeilds without values
             
             if let numericValue = Double(text), let conversionValue = WeightMetrics(rawValue: textField.tag)?.toString(numericValue) {
-                historyString += "\(conversionValue)\(textField != textFields.last ? "\n" : "")"
+                
+                // Append a new line to each conversion value, except the last line
+                historyString += "\(conversionValue)\(textField != textFields.last ? "\n" : "" )"
             }
         }
         
-        
-        if history.count == 5 { // TODO: replace value with a constant
-            history.remove(at: 4) // TODO: replace value with a constant
+        if history.count == maxHistorySize { // Remove the olderst element when the capacity exceeds
+            history.remove(at: lastHistoryElement)
         }
-        history.insert(historyString, at: 0) // TODO: replace value with a constant
-        UserDefaults.standard.set(history, forKey: "weightsHistory")
+        
+        history.insert(historyString, at: topHistoryElement) // This will show the latest conversion at the top
+        UserDefaults.standard.set(history, forKey: historyKey)
     }
-    
     
 }

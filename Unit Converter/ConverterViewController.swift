@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ConverterViewController.swift
 //  Unit Converter
 //
 //  Created by Gayashan Bombuwala on 3/15/19.
@@ -131,10 +131,10 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
         if let selectedRange = activeTextField.selectedTextRange {
             currentPosition = activeTextField.offset(from: activeTextField.beginningOfDocument, to: selectedRange.start)
             
-            if let position = activeTextField.position(from: selectedRange.start, offset: +1) {
+            if let position = activeTextField.position(from: selectedRange.start, offset: 1) {
                 nextPosition = position
             }
-            
+            // TODO: remove following
             print("Current cursor position: \(currentPosition)")
             print("Next cursor position: \(nextPosition)")
         }

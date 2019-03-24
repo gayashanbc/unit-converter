@@ -1,5 +1,5 @@
 //
-//  Utilities.swift
+//  Commons.swift
 //  Unit Converter
 //
 //  Created by Gayashan Bombuwala on 3/24/19.
@@ -7,6 +7,15 @@
 //
 
 import Foundation
+
+protocol SaveableConversion {
+    var topHistoryElement: Int {get}
+    var lastHistoryElement: Int {get}
+    var maxHistorySize: Int {get}
+    var historyKey: String {get}
+    
+    func saveConversion()
+}
 
 class Utilities {
     static func roundValue(_ valueToRound: Double) -> String {
