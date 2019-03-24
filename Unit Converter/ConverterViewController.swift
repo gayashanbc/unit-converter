@@ -47,8 +47,8 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
     }
     
     /*
-    Handles tab navigation
-    */
+     Handles tab navigation
+     */
     @IBAction func didPressTab(_ sender: UIButton) {
         let previousIndex = selectedTabIndex
         
@@ -96,59 +96,59 @@ class ConverterViewController: UIViewController, UITextFieldDelegate {
     }
     
     /*
-    Inserts the pressed button value of the custom keyboard to the active text field
-    */
+     Inserts the pressed button value of the custom keyboard to the active text field
+     */
     func setKeyValueToTextField(pressedButton: KeyboardButton) {
-        let cursorPosition = getCursorPositions()
+        let cursorPosition = getCursorPosition()
         
-        if var currentText = self.activeTextField.text {
+        if let currentText = self.activeTextField.text {
             switch pressedButton {
             case .delete:
-                if(currentText.count > 0){ // TODO: add to enum
-                    currentText.remove(at: currentText.index(currentText.startIndex, offsetBy: cursorPosition.current - 1))
-                    self.activeTextField.text = currentText
+                if currentText.count != 0 { // Ensure that there is at least one character to be deleted
+                    self.activeTextField.text?.remove(at: currentText.index(currentText.startIndex, offsetBy: cursorPosition - 1))
+                    
+                    // Ensure the editing changed event is only fired when not deleting a period
+                    // This will stop getting a new period added automatically when the current period is deleted
+                    if String(currentText[currentText.index(currentText.startIndex, offsetBy: cursorPosition - 1)]) != "." {
+                        activeTextField.sendActions(for: UIControl.Event.editingChanged)
+                    }
+                    setCursorPosition(from: cursorPosition, offset: -1)
                 }
             case .negation:
-                if(!currentText.contains("-")){
+                if !currentText.contains("-"), currentText.count != 0 { // Avoid double and empty insertions of negaation
                     activeTextField.text?.insert("-", at: currentText.index(currentText.startIndex, offsetBy: 0))
+                    activeTextField.sendActions(for: UIControl.Event.editingChanged) // Raise the textEditingChangedEvent
+                    setCursorPosition(from: cursorPosition)
                 }
-
+                
             case .period:
-                if(!currentText.contains(".")){
+                if !currentText.contains("."), currentText.count != 0 { // Avoid double and empty insertions of period
                     activeTextField.insertText(".")
-                    if(currentText.count > 1){ // TODO: add to enum
-                        activeTextField.selectedTextRange = activeTextField.textRange(from: cursorPosition.next, to: cursorPosition.next)
-                    }
+                    setCursorPosition(from: cursorPosition)
                 }
             default:
                 activeTextField.insertText(String(pressedButton.rawValue))
-                if(currentText.count > 1){ // TODO: add to enum
-                    activeTextField.selectedTextRange = activeTextField.textRange(from: cursorPosition.next, to: cursorPosition.next)
-                }
+                setCursorPosition(from: cursorPosition)
             }
             return;
         }
     }
     
     /*
-    Returns the current cursor position and the next cursor position
-    */
-    func getCursorPositions() -> (current: Int, next: UITextPosition)  {
-        var currentPosition = 0
-        var nextPosition = activeTextField.beginningOfDocument
-        
-        if let selectedRange = activeTextField.selectedTextRange {
-            currentPosition = activeTextField.offset(from: activeTextField.beginningOfDocument, to: selectedRange.start)
-            
-            if let position = activeTextField.position(from: selectedRange.start, offset: 1) {
-                nextPosition = position
-            }
-            // TODO: remove following
-            print("Current cursor position: \(currentPosition)")
-            print("Next cursor position: \(nextPosition)")
+     Return the current cursor position
+     */
+    func getCursorPosition() -> Int {
+        guard let selectedRange = activeTextField.selectedTextRange else {return 0}
+        return activeTextField.offset(from: activeTextField.beginningOfDocument, to: selectedRange.start)
+    }
+    
+    /*
+     Set the cursor position to the optionally specified position: default to the right of the current position
+     */
+    func setCursorPosition(from:Int, offset: Int = 1) {
+        if let newPosition = activeTextField.position(from: activeTextField.beginningOfDocument, offset: from + offset) {
+            activeTextField.selectedTextRange = activeTextField.textRange(from: newPosition, to: newPosition)
         }
-        
-        return (currentPosition, nextPosition)
     }
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Metrics: Int{
+enum Metrics: Int {
     case Weight, Temperature, Length, Speed, Volume
     
     func toString() -> String {
@@ -48,19 +48,6 @@ class Utilities {
     static let buttonDeselectedColor = UIColor(red:0.06, green:0.04, blue:0.24, alpha:1.0)
     
     static func roundValue(_ valueToRound: Double) -> String {
-        let roundedValue = String(round(10000 * valueToRound) / 10000)
-//        if let trailingZeros = roundedValue.components(separatedBy: ".").last?.count {
-//            switch trailingZeros { // Add missing trailing zeros
-//            case 1:
-//                roundedValue += "000"
-//            case 2:
-//                roundedValue += "00"
-//            case 3:
-//                roundedValue += "0"
-//            default:
-//                break
-//            }
-//        }
-        return roundedValue
+        return String(round(10000 * valueToRound) / 10000)
     }
 }

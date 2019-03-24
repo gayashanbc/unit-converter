@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,18 +15,22 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launcher" translatesAutoresizingMaskIntoConstraints="NO" id="J5D-bs-qkF">
-                                <rect key="frame" x="118.66666666666669" y="285.66666666666669" width="177" height="165"/>
+                                <rect key="frame" x="99" y="251" width="177" height="165"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="165" id="0bT-sQ-k3Q"/>
                                     <constraint firstAttribute="width" constant="177" id="STf-Cn-wQw"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit Converter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5R-AP-ZlP">
-                                <rect key="frame" x="71" y="151" width="272" height="83.666666666666686"/>
+                                <rect key="frame" x="71" y="151" width="233" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="233" id="SuO-up-LBf"/>
+                                    <constraint firstAttribute="height" constant="49" id="bTt-aT-zNN"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="41"/>
                                 <color key="textColor" red="0.058823529409999999" green="0.039215686270000001" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -34,12 +38,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.80392156859999997" green="1" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Z5R-AP-ZlP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="131" id="3D6-mU-O10"/>
-                            <constraint firstItem="J5D-bs-qkF" firstAttribute="top" secondItem="Z5R-AP-ZlP" secondAttribute="bottom" constant="51" id="QsP-2H-pZq"/>
-                            <constraint firstItem="Z5R-AP-ZlP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="71" id="bkt-tV-deP"/>
+                            <constraint firstItem="J5D-bs-qkF" firstAttribute="top" secondItem="Z5R-AP-ZlP" secondAttribute="bottom" constant="51" id="JN6-UC-OGN"/>
                             <constraint firstItem="J5D-bs-qkF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cuE-ih-anO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Z5R-AP-ZlP" secondAttribute="trailing" constant="71" id="lhE-Jq-o6c"/>
                             <constraint firstItem="J5D-bs-qkF" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vo1-Dr-eGN"/>
+                            <constraint firstItem="Z5R-AP-ZlP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wQL-Rs-vfi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

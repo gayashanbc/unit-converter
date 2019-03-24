@@ -72,7 +72,6 @@ class TempsViewController: UIViewController, UITextFieldDelegate, MetricConverte
         guard let enteredNumValue = Double(textFieldValue) else {return}
         guard let enteredValueInKelvin = TemperatureMetrics(rawValue: sender.tag)?.convertToKelvin(enteredNumValue) else {return}
         
-        
         for textField in textFields {
             if let convertedScaleValue = TemperatureMetrics(rawValue: textField.tag)?.convertToOtherScale(enteredValueInKelvin){
                 textField.text = Utilities.roundValue(convertedScaleValue)
