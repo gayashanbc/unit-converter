@@ -28,16 +28,11 @@ enum Metrics: Int {
 }
 
 /*
- This protocol should be adapted by each metric converter class
+ This protocol should be adapted by each metric enum
  */
-protocol MetricConverter {
-    var parentControllerReference: UITextFieldDelegate? {get set} // required to assign the UITextFieldDelegate
-    var topHistoryElement: Int {get}
-    var lastHistoryElement: Int {get}
-    var maxHistorySize: Int {get}
-    var historyKey: String {get}
-    
-    func saveConversion()
+protocol MetricsEnum {
+    func getConversionRateToDefaultScale() -> Double
+    func toString(_ value: Double) -> String
 }
 
 /*
@@ -47,7 +42,19 @@ class Utilities {
     static let buttonSelectedColor = UIColor(red:0.03, green:0.27, blue:0.44, alpha:1.0)
     static let buttonDeselectedColor = UIColor(red:0.06, green:0.04, blue:0.24, alpha:1.0)
     
+    // Round-up a double value to 4 decimal places and returns string
     static func roundValue(_ valueToRound: Double) -> String {
         return String(round(10000 * valueToRound) / 10000)
+    }
+    
+    // Remove the decimal places if there's only one trailing decimal zero [5.0 grams to 5 grams]
+    static func removeSingleTrailingZero(from: Double) -> String {
+        let numericPieces = String(from).components(separatedBy: ".")
+        return numericPieces.last == "0" ? numericPieces.first! : numericPieces.joined(separator: ".")
+    }
+    
+    // Convert seomething like 1 kilograms to 1 kilogram
+    static func getStringSuffixForMetric (_ value: Double, suffixFraction:String = "s") -> String {
+        return value != 1.0 ? suffixFraction : ""
     }
 }

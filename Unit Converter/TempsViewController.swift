@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum TemperatureMetrics: Int {
+enum TemperatureMetrics: Int, MetricsEnum {
     case celsius, farenheit, kelvin
     
     func convertToKelvin(_ fromValue: Double) -> Double {
@@ -34,40 +34,37 @@ enum TemperatureMetrics: Int {
     }
     
     func toString(_ value: Double) -> String {
-        let numericPieces = String(value).components(separatedBy: ".")
-        let stringValue = numericPieces.last == "0" ? numericPieces.first : numericPieces.joined(separator: ".")
+        let stringValue = Utilities.removeSingleTrailingZero(from: value)
         
         switch self {
         case .celsius:
-            return "\(stringValue!) celsius"
+            return "\(stringValue) celsius"
         case .farenheit:
-            return "\(stringValue!) farenheit"
+            return "\(stringValue) farenheit"
         case .kelvin:
-            return "\(stringValue!) kelvin"
+            return "\(stringValue) kelvin"
         }
     }
+    
+    // Exceptional situation
+    func getConversionRateToDefaultScale() -> Double {return 0.0}
+    
 }
 
-class TempsViewController: UIViewController, UITextFieldDelegate, MetricConverter {
+class TempsViewController: UnitConvesionController {
     @IBOutlet weak var celsiusTextField: UITextField!
     @IBOutlet weak var farenheitTextField: UITextField!
     @IBOutlet weak var kelvinTextField: UITextField!
     
-    var textFields: [UITextField]!
-    var parentControllerReference: UITextFieldDelegate?
-    
-    let topHistoryElement = 0, lastHistoryElement = 4, maxHistorySize = 5, historyKey = "tempsHistory"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        celsiusTextField.delegate = parentControllerReference
-        farenheitTextField.delegate = parentControllerReference
-        kelvinTextField.delegate = parentControllerReference
-        
         textFields = [celsiusTextField, farenheitTextField, kelvinTextField]
+        historyKey = "tempsHistory"
+        assignDelegatesToTextFields()
     }
     
-    @IBAction func textFieldEditingChanged(_ sender: UITextField) {
+    @IBAction override func textFieldEditingChanged(_ sender: UITextField) {
         guard let textFieldValue = sender.text else {return}
         guard let enteredNumValue = Double(textFieldValue) else {return}
         guard let enteredValueInKelvin = TemperatureMetrics(rawValue: sender.tag)?.convertToKelvin(enteredNumValue) else {return}
@@ -79,28 +76,9 @@ class TempsViewController: UIViewController, UITextFieldDelegate, MetricConverte
         }
     }
     
-    func saveConversion()  {
-        var historyString: String = ""
-        var history = UserDefaults.standard.array(forKey: historyKey) ?? []
-        
-        for textField in textFields {
-            guard let text = textField.text else {return}
-            
-            if let numericValue = Double(text), let conversionValue = TemperatureMetrics(rawValue: textField.tag)?.toString(numericValue) {
-                historyString += "\(conversionValue)\(textField != textFields.last ? "\n" : "" )"
-            }
-        }
-        
-        if historyString != "" {
-            if history.count == maxHistorySize {
-                history.remove(at: lastHistoryElement)
-            }
-            
-            history.insert(historyString, at: topHistoryElement)
-            UserDefaults.standard.set(history, forKey: historyKey)
-        }
-    
+    override func getAsString(forValue: Double, scaleID: Int) -> String {
+        return (TemperatureMetrics(rawValue: scaleID)?.toString(forValue))!
     }
     
-
+    
 }
